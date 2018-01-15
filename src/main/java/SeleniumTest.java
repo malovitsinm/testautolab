@@ -10,10 +10,10 @@ import org.testng.annotations.Test;
 
 import static java.lang.System.setProperty;
 @Test
-public class TestClass {
+public class SeleniumTest {
     @Test
     public void chromeTest(){
-        //setProperty("webdriver.chrome.driver", "%FILEPATH%"); // ситуация, в которой драйвер лежит бог знает где
+        setProperty("webdriver.chrome.driver", "src\\main\\resourses\\chromedriver.exe"); // ситуация, в которой драйвер лежит бог знает где
         WebDriver driver = new ChromeDriver();
         driver.navigate().to("https://epam.com");
         Assert.assertEquals(driver.getTitle(), "EPAM | Software Product Development Services");
