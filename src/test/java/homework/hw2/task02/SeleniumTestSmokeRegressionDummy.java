@@ -6,30 +6,32 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static java.lang.System.setProperty;
+import static org.testng.Assert.*;
 
 @Test
 public class SeleniumTestSmokeRegressionDummy {
+
     @Test(groups = {"Smoke", "Regression"})
     public void chromeTest(){
         setProperty("webdriver.chrome.driver", "src\\main\\resourses\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         driver.navigate().to("https://jdi-framework.github.io/tests");
-        Assert.assertEquals(driver.getTitle(), "Index Page");
+        assertEquals(driver.getTitle(), "Index Page");
         driver.close();
     }
 
     @Test(groups = {"Smoke", "Regression"})
     public void trueAssert(){
-        Assert.assertTrue(true);
+        assertTrue(true);
     }
 
     @Test(groups = {"Smoke"})
     public void falseAssert(){
-        Assert.assertFalse(false);
+        assertFalse(false);
     }
 
     @Test(groups = {"Regression"})
     public void equalAssert(){
-        Assert.assertEquals(1337,1337);
+        assertEquals(1337,1337);
     }
 }

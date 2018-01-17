@@ -1,16 +1,14 @@
 package homework.hw2;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import testBases.SimpleSeleniumTestBase;
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
+
+import static org.testng.Assert.assertTrue;
 
 public class Task01 extends SimpleSeleniumTestBase {
 
@@ -29,6 +27,6 @@ public class Task01 extends SimpleSeleniumTestBase {
                 .stream()
                 .map(e -> e.getText().replaceAll("\n", " "))
                 .collect(Collectors.toList());
-        Assert.assertTrue(imagesTexts.contains(expectedString));
+        assertTrue(imagesTexts.contains(expectedString));
     }
 }

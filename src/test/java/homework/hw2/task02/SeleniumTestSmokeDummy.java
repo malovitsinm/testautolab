@@ -6,6 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static java.lang.System.setProperty;
+import static org.testng.Assert.*;
 
 @Test
 public class SeleniumTestSmokeDummy {
@@ -15,13 +16,13 @@ public class SeleniumTestSmokeDummy {
         setProperty("webdriver.chrome.driver", "src\\main\\resourses\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         driver.navigate().to("https://jdi-framework.github.io/tests");
-        Assert.assertEquals(driver.getTitle(), "Index Page");
+        assertEquals(driver.getTitle(), "Index Page");
         driver.close();
     }
 
     @Test(groups = {"Smoke"})
     public void smokeEqualsAssert(){
-        Assert.assertEquals("Smoke!", "Smoke!");
+        assertEquals("Smoke!", "Smoke!");
     }
 
 }
