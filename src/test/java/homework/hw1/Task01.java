@@ -11,11 +11,13 @@ import java.util.Arrays;
 import java.util.List;
 
 import static java.lang.System.setProperty;
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class Task01 {
-    WebDriver driver;
-    List<String> expectedImageTextValues = Arrays.asList(
+
+    private WebDriver driver;
+    private List<String> expectedImageTextValues = Arrays.asList(
             "To include good practices and ideas from successful EPAM projec",
             "To be flexible and customizable",
             "To be multiplatform",
@@ -41,15 +43,9 @@ public class Task01 {
 
         //5 Assert User name in the left-top side of screen that user is loggined
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        String userName = (String)js.executeScript(
+        String userName = (String) js.executeScript(
                 "return document.querySelector('.profile-photo > span:nth-child(3)').innerHTML;");
-        assertEquals(userName,"Piter Chailovskii");
-        /* NOTE TO REVIEWER:
-           I've encountered some problems while trying to get capitalized name string using variations of the
-           following code:
-               WebElement userName = driver.findElement(By.cssSelector(".profile-photo > span:nth-child(3)")).getText();
-           Does using jsExecutor make a suitable workaround?
-        * */
+        assertEquals(userName, "Piter Chailovskii");
 
         //6 Assert Browser title
         assertEquals(driver.getTitle(), "Index Page");
@@ -66,9 +62,7 @@ public class Task01 {
         assertEquals(images.size(), 4);
         for (int i = 0; i < imageTexts.size(); i++) {
             assertTrue(imageTexts.get(i).isDisplayed());
-            assertEquals(
-                    imageTexts.get(i).getText().replaceAll("\n"," "),
-                    expectedImageTextValues.get(i));
+            assertEquals(imageTexts.get(i).getText().replaceAll("\n", " "), expectedImageTextValues.get(i));
         }
 
         //9 Assert that there are the main header and the text below it on the Home Page
