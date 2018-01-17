@@ -17,18 +17,17 @@ public class Task01 extends SimpleSeleniumTestBase {
     @DataProvider(parallel = true)
     public Object[][] dpImagesTextContentTest() {
         return new Object[][]{
-                {"To include good practices\n" + "and ideas from successful\n" + "EPAM projec"},
-                {"To be flexible and\n" + "customizable"},
+                {"To include good practices and ideas from successful EPAM projec"},
+                {"To be flexible and customizable"},
                 {"To be multiplatform"},
-                {"Already have good base\n" + "(about 20 internal and\n" + "some external projects),\n"
-                        + "wish to get more…"}};
+                {"Already have good base (about 20 internal and some external projects), wish to get more…"}};
     }
 
     @Test(dataProvider = "dpImagesTextContentTest")
     public void imagesTextContentTest(String expectedString) {
         List<String> imagesTexts = driver.findElements(By.cssSelector(".benefit-txt"))
                 .stream()
-                .map(WebElement::getText)
+                .map(e -> e.getText().replaceAll("\n", " "))
                 .collect(Collectors.toList());
         Assert.assertTrue(imagesTexts.contains(expectedString));
     }
