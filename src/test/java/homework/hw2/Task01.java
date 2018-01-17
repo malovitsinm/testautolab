@@ -9,14 +9,10 @@ import org.testng.annotations.Test;
 import testBases.SimpleSeleniumTestBase;
 
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class Task01 extends SimpleSeleniumTestBase {
-    List<WebElement> imagesTexts;
-
-    @BeforeTest
-    public void initImageTextList(){
-        imagesTexts = driver.findElements(By.cssSelector(".benefit-txt"));
-    }
 
     @DataProvider(parallel = true)
     public Object[][] dpImagesTextContentTest() {
@@ -29,7 +25,11 @@ public class Task01 extends SimpleSeleniumTestBase {
     }
 
     @Test(dataProvider = "dpImagesTextContentTest")
-    public void imagesTextContentTest(String expectedString){
+    public void imagesTextContentTest(String expectedString) {
+        List<String> imagesTexts = driver.findElements(By.cssSelector(".benefit-txt"))
+                .stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
         Assert.assertTrue(imagesTexts.contains(expectedString));
     }
 }
