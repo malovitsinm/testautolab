@@ -8,7 +8,7 @@ import org.testng.annotations.*;
 import static java.lang.System.setProperty;
 
 public class Task03 {
-    WebDriver driver;
+    private WebDriver driver;
 
     @BeforeSuite
     public void setUp() {
@@ -44,9 +44,7 @@ public class Task03 {
 
     @Test
     public void navigateToSetURL() {
-        driver.navigate().to("https://www.epam.com");
-        Assert.assertEquals(driver.getTitle(),
-                "EPAM | Software Product Development Services");
-
+        driver.navigate().to("https://jdi-framework.github.io/tests");
+        Assert.assertEquals(driver.getTitle(), "Index Page");
     }
 }
