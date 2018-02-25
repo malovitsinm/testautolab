@@ -18,6 +18,17 @@
             <artifactId>selenium-java</artifactId>
             <version>3.8.1</version>
         </dependency>
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>4.10</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.18</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
     <build>
         <pluginManagement>
@@ -36,7 +47,7 @@
                     <version>2.20.1</version>
                     <configuration>
                         <suiteXmlFiles>
-                            <suiteXmlFile>src\test\resourses\testng.xml</suiteXmlFile>
+                            <suiteXmlFile>src\test\resourses\Lec4configs\lec4config.xml</suiteXmlFile>
                         </suiteXmlFiles>
                     </configuration>
                 </plugin>

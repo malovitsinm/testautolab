@@ -1,6 +1,6 @@
-package enums;
+package enums.hw4.diff_elements;
 
-public enum DifferentElementsLogEntriesEnum {
+public enum LogEntriesEnum {
     TEXT_0("Colors:Yellow"),
     TEXT_1("metal:Selen"),
     TEXT_2("Wind:true"),
@@ -10,7 +10,7 @@ public enum DifferentElementsLogEntriesEnum {
 
     public String text;
 
-    DifferentElementsLogEntriesEnum(String text) {
+    LogEntriesEnum(String text) {
         this.text = text;
     }
 

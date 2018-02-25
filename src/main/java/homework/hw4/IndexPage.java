@@ -1,10 +1,10 @@
 package homework.hw4;
 
 import com.codeborne.selenide.*;
-import enums.IndexPageServiceOptionsEnum;
-import org.openqa.selenium.WebElement;
+import entities.hw4.User;
+import enums.hw4.page.BenefitTextEnum;
+import enums.hw4.page.ServiceOptionsEnum;
 import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
 
 import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.Condition.*;
@@ -57,36 +57,47 @@ public class IndexPage {
         Selenide.open("https://jdi-framework.github.io/tests/index.htm");
     }
 
-    public void performLogin(String login, String password) {
+    public void login(User user) {
         dropdownBtn.click();
-        loginInput.sendKeys(login);
-        passwordInput.sendKeys(password);
+        loginInput.sendKeys(user.getLogin());
+        passwordInput.sendKeys(user.getPassword());
         loginFormSubmit.click();
     }
 
-    public void checkLoggedUserName(String userName) {
-        userNameLogged.shouldHave(exactText(userName));
+    public void checkLoggedUserName(User user) {
+        userNameLogged.shouldHave(exactText(user.getName()));
     }
 
-    public void checkServiceHeaderDropdownMenuText(IndexPageServiceOptionsEnum[] textValues) {
+    public void checkServiceHeaderDropdownMenuText() {
+        ServiceOptionsEnum[] textValues = ServiceOptionsEnum.values();
         for (int i = 0; i < serviceMenuDropdownItems.size(); i++) {
             serviceMenuDropdownItems.get(i).shouldHave(text(textValues[i].text));
         }
     }
 
-    public void checkServiceSubmenuText(IndexPageServiceOptionsEnum[] textValues) {
+    public void checkServiceSubmenuText() {
+        ServiceOptionsEnum[] textValues = ServiceOptionsEnum.values();
         for (int i = 0; i < serviceSubmenuItems.size(); i++) {
             serviceSubmenuItems.get(i).shouldHave(text(textValues[i].text));
         }
     }
 
-    public void checkBenefitImageCount(int count) {
-        benefitImages.shouldHave(size(count));
+
+    public void checkBenefitsImgs(){
+        benefitImages.shouldHave(size(BenefitTextEnum.values().length));
+        benefitImagesTexts.shouldHave(size(BenefitTextEnum.values().length));
+        for(int i = 0; i < benefitImagesTexts.size(); i++) {
+            benefitImagesTexts.get(i).shouldHave(text(BenefitTextEnum.values()[i].text));
+        }
     }
 
-    public void checkBenefitImageTextCount(int count) {
-        benefitImagesTexts.shouldHave(size(count));
+    private void checkBenefitImageCount() {
+        benefitImages.shouldHave(size(BenefitTextEnum.values().length));
     }
+
+//    public void checkBenefitImageTextCount(int count) {
+//        benefitImagesTexts.shouldHave(size(count));
+//    }
 
     public void checkTitleText() {
         mainTitle.should(be(visible));
@@ -101,7 +112,7 @@ public class IndexPage {
         serviceAsideButton.click();
     }
 
-    public void redirectToServiceMenuItemPage(IndexPageServiceOptionsEnum menuItem) {
+    public void openPage(ServiceOptionsEnum menuItem) {
         openServiceHeaderDropdown();
         serviceMenuDropdownItems.get(menuItem.ordinal()).click();
     }

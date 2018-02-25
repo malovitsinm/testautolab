@@ -1,7 +1,10 @@
-package pageObjects;
+package page_objects;
 
+import enums.hw4.page.TextEnum;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import static org.testng.Assert.*;
 
 public class IndexPage {
 
@@ -23,5 +26,10 @@ public class IndexPage {
         passwordInput.sendKeys(password);
         loginFormSubmit.click();
     }
+
+    public void checkTextUnderImages(TextEnum textEnum) {
+        assertEquals("", textEnum.text);
+    }
+
 
 }

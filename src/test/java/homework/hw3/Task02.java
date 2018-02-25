@@ -1,6 +1,6 @@
 package homework.hw3;
 
-import enums.IndexPageTextEnum;
+import enums.hw4.page.TextEnum;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -53,7 +53,7 @@ public class Task02 {
 
         //8 Assert that there are 4 texts on the Home Page and check them by getting texts
         indexPage.checkBenefitImagesTextsCount(4);
-        indexPage.checkBenefitImagesTexts(IndexPageTextEnum.values());
+        indexPage.checkBenefitImagesTexts(TextEnum.values());
 
         //9 Assert that there are the main header and the text below it on the Home Page
         indexPage.checkHeaderDisplayed(true);

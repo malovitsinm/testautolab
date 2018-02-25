@@ -1,6 +1,6 @@
 package homework.hw3;
 
-import enums.IndexPageTextEnum;
+import enums.hw4.page.TextEnum;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
 
 public class IndexPage {
     private WebDriver driver;
@@ -70,15 +71,16 @@ public class IndexPage {
         for (WebElement image : benefitImages) {
             assertEquals(image.isDisplayed(), isDisplayed);
         }
+        benefitImages.forEach(i -> assertTrue(i.isDisplayed()));
     }
 
     public void checkBenefitImagesTextsCount(int count) {
         assertEquals(count, benefitImagesTexts.size());
     }
 
-    public void checkBenefitImagesTexts(IndexPageTextEnum[] indexPageTextEnum) {
+    public void checkBenefitImagesTexts(TextEnum[] textEnum) {
         for (int i = 0; i < 4; i++) {
-            assertEquals(indexPageTextEnum[i].text, benefitImagesTexts.get(i).getText().replaceAll("\n", " "));
+            assertEquals(textEnum[i].text, benefitImagesTexts.get(i).getText().replaceAll("\n", " "));
         }
     }
 

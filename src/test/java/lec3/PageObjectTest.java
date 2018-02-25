@@ -6,7 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import pageObjects.IndexPage;
+import page_objects.IndexPage;
 
 import static java.lang.System.setProperty;
 

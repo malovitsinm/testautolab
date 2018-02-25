@@ -1,6 +1,6 @@
-package enums;
+package enums.hw4.diff_elements;
 
-public enum DifferentElementsDropdownTextEnum {
+public enum DropdownTextEnum {
     RED("Red"),
     GREEN("Green"),
     BLUE("Blue"),
@@ -8,7 +8,7 @@ public enum DifferentElementsDropdownTextEnum {
 
     public String text;
 
-    DifferentElementsDropdownTextEnum(String text) {
+    DropdownTextEnum(String text) {
         this.text = text;
     }
 }

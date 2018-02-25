@@ -1,6 +1,6 @@
-package enums;
+package enums.hw4.page;
 
-public enum IndexPageServiceOptionsEnum {
+public enum ServiceOptionsEnum {
     SUPPORT("Support"),
     DATES("Dates"),
     COMPLEX_TBL("Complex Table"),
@@ -10,7 +10,7 @@ public enum IndexPageServiceOptionsEnum {
 
     public String text;
 
-    IndexPageServiceOptionsEnum(String text) {
+    ServiceOptionsEnum(String text) {
         this.text = text;
     }
 

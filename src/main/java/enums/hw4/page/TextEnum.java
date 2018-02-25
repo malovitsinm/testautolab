@@ -1,6 +1,6 @@
-package enums;
+package enums.hw4.page;
 
-public enum IndexPageTextEnum {
+public enum TextEnum {
     TEXT_0("To include good practices and ideas from successful EPAM projec"),
     TEXT_1("To be flexible and customizable"),
     TEXT_2("To be multiplatform"),
@@ -8,7 +8,7 @@ public enum IndexPageTextEnum {
 
     public String text;
 
-    IndexPageTextEnum(String text) {
+    TextEnum(String text) {
         this.text = text;
     }
 
