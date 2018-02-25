@@ -5,6 +5,8 @@ import entities.hw4.User;
 import enums.hw4.page.BenefitTextEnum;
 import enums.hw4.page.ServiceOptionsEnum;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import ru.yandex.qatools.allure.annotations.Step;
 
 import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.Condition.*;
@@ -52,11 +54,12 @@ public class IndexPage {
     @FindBy(css = ".main-txt")
     private SelenideElement mainTitleText;
 
-
+    @Step
     public void open() {
         Selenide.open("https://jdi-framework.github.io/tests/index.htm");
     }
 
+    @Step
     public void login(User user) {
         dropdownBtn.click();
         loginInput.sendKeys(user.getLogin());
@@ -64,10 +67,12 @@ public class IndexPage {
         loginFormSubmit.click();
     }
 
+    @Step
     public void checkLoggedUserName(User user) {
         userNameLogged.shouldHave(exactText(user.getName()));
     }
 
+    @Step
     public void checkServiceHeaderDropdownMenuText() {
         ServiceOptionsEnum[] textValues = ServiceOptionsEnum.values();
         for (int i = 0; i < serviceMenuDropdownItems.size(); i++) {
@@ -75,6 +80,7 @@ public class IndexPage {
         }
     }
 
+    @Step
     public void checkServiceSubmenuText() {
         ServiceOptionsEnum[] textValues = ServiceOptionsEnum.values();
         for (int i = 0; i < serviceSubmenuItems.size(); i++) {
@@ -82,36 +88,33 @@ public class IndexPage {
         }
     }
 
-
+    @Step
     public void checkBenefitsImgs(){
         benefitImages.shouldHave(size(BenefitTextEnum.values().length));
         benefitImagesTexts.shouldHave(size(BenefitTextEnum.values().length));
         for(int i = 0; i < benefitImagesTexts.size(); i++) {
-            benefitImagesTexts.get(i).shouldHave(text(BenefitTextEnum.values()[i].text));
+            //A bit of regex shamanism to clean up all html tags and line breaks
+            String formatted = benefitImagesTexts.get(i).getText().replaceAll("<[^>]*>","").replaceAll("\n", " ");
+            Assert.assertEquals(formatted, BenefitTextEnum.values()[i].text);
         }
     }
 
-    private void checkBenefitImageCount() {
-        benefitImages.shouldHave(size(BenefitTextEnum.values().length));
-    }
-
-//    public void checkBenefitImageTextCount(int count) {
-//        benefitImagesTexts.shouldHave(size(count));
-//    }
-
+    @Step
     public void checkTitleText() {
         mainTitle.should(be(visible));
         mainTitleText.should(be(visible));
     }
-
+    @Step
     public void openServiceHeaderDropdown() {
         serviceHeaderButton.click();
     }
 
+    @Step
     public void openServiceAsideMenu() {
         serviceAsideButton.click();
     }
 
+    @Step
     public void openPage(ServiceOptionsEnum menuItem) {
         openServiceHeaderDropdown();
         serviceMenuDropdownItems.get(menuItem.ordinal()).click();

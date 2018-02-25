@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeSuite;
 
 public abstract class SelenideBase {
 
+
     @BeforeSuite
     public void setUpSuite() {
         Configuration.browser = "chrome";

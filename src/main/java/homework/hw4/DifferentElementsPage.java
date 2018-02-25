@@ -8,17 +8,23 @@ import enums.hw4.diff_elements.DropdownTextEnum;
 import enums.hw4.diff_elements.LogEntriesEnum;
 import enums.hw4.diff_elements.RadiobuttonTextEnum;
 import org.openqa.selenium.support.FindBy;
+import ru.yandex.qatools.allure.annotations.Step;
 
-import java.util.Arrays;
-
-import static com.codeborne.selenide.CollectionCondition.*;
+import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.*;
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class DifferentElementsPage {
 
+    @FindBy(css= ".label-checkbox")
+    private ElementsCollection natureForceLabelCollection;
+
     @FindBy(css = ".label-checkbox input")
     private ElementsCollection natureForceCheckboxCollection;
+
+    @FindBy(css = ".label-radio")
+    private ElementsCollection metalLabelCollection;
 
     @FindBy(css = ".label-radio input")
     private ElementsCollection metalRadioBtnCollection;
@@ -41,24 +47,29 @@ public class DifferentElementsPage {
     @FindBy(css = ".main-content-hg .uui-button")
     private ElementsCollection buttonCollection;
 
-    public void clickOnCheckbox(CheckboxTextEnum checkboxValue) {
+    @Step
+    public void checkCheckBox(CheckboxTextEnum checkboxValue) {
         natureForceCheckboxCollection.get(checkboxValue.ordinal()).click();
     }
 
-    public void clickMetalRadioBtn(RadiobuttonTextEnum radioValue) {
+    @Step
+    public void selectMetalRadio(RadiobuttonTextEnum radioValue) {
         metalRadioBtnCollection.get(radioValue.ordinal()).click();
     }
 
+    @Step
     public void selectColorOption(DropdownTextEnum colorValue) {
         dropdownColorsMenu.click();
         dropdownColorsOptions.get(colorValue.ordinal()).click();
     }
 
+    @Step
     public void isChecked(CheckboxTextEnum checkboxValue, boolean isChecked) {
         Condition condition = isChecked ? checked : not(checked);
         natureForceCheckboxCollection.get(checkboxValue.ordinal()).should(condition);
     }
 
+    @Step
     public void checkLogs(int startIndex, int logLength) {
         LogEntriesEnum[] enumValue = LogEntriesEnum.values();
         for (int i = startIndex; i < logLength; i++) {
@@ -68,14 +79,20 @@ public class DifferentElementsPage {
         }
     }
 
+    @Step
     public void checkElementsExistence() {
         natureForceCheckboxCollection.shouldHave(size(CheckboxTextEnum.values().length));
-        natureForceCheckboxCollection.forEach(
+        natureForceLabelCollection.shouldHave(size(CheckboxTextEnum.values().length));
+        natureForceLabelCollection.forEach(
                 s -> assertTrue(CheckboxTextEnum.getTextList().contains(s.getText())));
+
         metalRadioBtnCollection.shouldHave(size(RadiobuttonTextEnum.values().length));
-        metalRadioBtnCollection.forEach(
+        metalLabelCollection.shouldHave(size(RadiobuttonTextEnum.values().length));
+        metalLabelCollection.forEach(
                 s -> assertTrue(RadiobuttonTextEnum.getTextList().contains(s.getText())));
+
         buttonCollection.shouldHave(size(2));
+
         rightSection.should(be(visible));
         leftSection.should(be(visible));
     }
